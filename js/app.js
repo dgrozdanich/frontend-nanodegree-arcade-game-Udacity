@@ -1,4 +1,5 @@
 // Enemies our player must avoid
+// Pretty sure I can make these into classes. Game slightly broke when I did that though. 
 let Enemy = function(x, y, speed) {
     // Enemy object has a starting point on the x-axis
     // Starting point on the y-axis
@@ -25,14 +26,14 @@ Enemy.prototype.update = function(dt) {
     // Enemy object a random speed
     if (this.x > 550) {
         this.x = -100;
-        this.speed = 100 + Math.floor(Math.random() * 512);
+        this.speed = 100 + Math.floor(Math.random() * 600);
     }
 
     //check for player collision
-    if (player.x < this.x + 60 &&
-        player.x + 37 > this.x &&
-        player.y < this.y + 25 &&
-        30 + player.y > this.y) {
+    if (player.x < this.x + 45 &&
+        player.x + 30 > this.x &&
+        player.y < this.y + 20 &&
+        20 + player.y > this.y) {
         player.x = 200;
         player.y = 380;
     }
@@ -57,24 +58,8 @@ let Player = function(x, y, speed) {
 };
 
 Player.prototype.update = function() {
-    // Prevent player from moving beyond the canvas walls
-    if (this.y > 380) {
-        this.y = 380;
-    } 
-
-    if (this.x > 400) {
-        this.x = 400;
-    }
-
-    if (this.x < 0) {
-        this.x = 0;
-    }
-
-    //check for player reaching top tile, resets player to beginning if they reach
-    if (this.y < 0) {
-            this.x = 200;
-            this.y = 380;      
-    }
+  //This is a useless function...except it needs to be defined or the game breaks
+  //Definietly need to figure out how to get rid of this entirely. 
 };
 
 Player.prototype.render = function() {
@@ -85,33 +70,66 @@ Player.prototype.handleInput = function(keyPress){
     //sets up listeners for each key press and what they do. 
     //from middle of one square to right or left is about 50 pixels
     // from middle of one square up or down is about 30 pixels
+    //Makes sure player stays in boundaries of the canvas. 
+    // Need to combine some of these so as it's redunant so far 
     switch (keyPress){
         case 'left':
             this.x -= this.speed + 50;
+            if (this.x < 0) {
+                this.x = 0;
+            }
             break;
         case 'up':
             this.y -= this.speed + 30;
+            //check for player reaching top tile, resets player to beginning if they reach
+            if (this.y < 0) {
+            this.x = 200;
+            this.y = 380;   
+            };
             break;
         case 'right':
             this.x += this.speed + 50;
+             if (this.x > 400) {
+                 this.x = 400;
+            }
             break;
         case 'down':
             this.y += this.speed + 30;
+            if (this.y > 380) {
+                this.y = 380;
+            }
             break;
         case 'a':
             this.x -= this.speed + 50;
+            if (this.x < 0) {
+                this.x = 0;
+            }
             break;
         case 'w':
             this.y -= this.speed + 30;
+            //check for player reaching top tile, resets player to beginning if they reach
+            if (this.y < 0) {
+            this.x = 200;
+            this.y = 380;   
+            };
             break;
         case 'd':
             this.x += this.speed + 50;
+            if (this.x > 400) {
+                this.x = 400;
+            }
             break;
         case 's':
             this.y += this.speed + 30;
+            if (this.y > 380) {
+                this.y = 380;
+            }
             break;
         case 'numpad5':
             this.y += this.speed + 30;
+            if (this.y > 380) {
+                this.y = 380;
+            }
             break;
     }
 };
@@ -129,7 +147,7 @@ let enemy;
 // PosY is set by the array, and speed is random
 //pushes enemy variable to Enemy object 
 enemyPosition.forEach(function(posY){
-    enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 512));
+    enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 250));
     allEnemies.push(enemy);
 });
 
