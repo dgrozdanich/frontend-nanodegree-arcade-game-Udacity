@@ -134,6 +134,9 @@ Player.prototype.handleInput = function(keyPress){
 };
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+// https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_building_practice
+// Both sites helped with creating array and multiple instances of objects
 let allEnemies = [];
 // Sets enemy object position on the Y axis
 const enemyPosition = [60,140,220];
