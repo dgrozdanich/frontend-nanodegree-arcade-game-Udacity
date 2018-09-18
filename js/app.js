@@ -1,5 +1,7 @@
 // Enemies our player must avoid
 // Pretty sure I can make these into classes. Game slightly broke when I did that though. 
+// https://www.w3schools.com/graphics/game_controllers.asp helped with creating objects
+// and making them move across screen. 
 let Enemy = function(x, y, speed) {
     // Enemy object has a starting point on the x-axis
     // Starting point on the y-axis
@@ -30,6 +32,8 @@ Enemy.prototype.update = function(dt) {
     }
 
     //check for player collision
+    // learned how this worked from 
+    //https://stackoverflow.com/questions/37127663/collision-in-2d-processingjs-game
     if (player.x < this.x + 45 &&
         player.x + 30 > this.x &&
         player.y < this.y + 20 &&
@@ -55,11 +59,6 @@ let Player = function(x, y, speed) {
 
     // image sprite for our player (would like to make this selectable at some point)
     this.sprite = 'images/char-boy.png';
-};
-
-Player.prototype.update = function() {
-  //This is a useless function...except it needs to be defined or the game breaks
-  //Definietly need to figure out how to get rid of this entirely. 
 };
 
 Player.prototype.render = function() {
